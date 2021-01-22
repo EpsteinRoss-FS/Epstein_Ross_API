@@ -9,10 +9,9 @@ namespace Epstein_Ross_API
 
 
         public static APIConnect _api;
-        public static List<string> starWarsFilms = new List<string> { "Star Wars", "empire strikes back", "return of the jedi"};
-        public static List<dynamic> filmList = new List<dynamic>();
+        public static List<dynamic> shipList = new List<dynamic>();
         public static bool hasQuit = false;
-        public Application() 
+        public Application()
         {
             _api = new APIConnect();
             Startup();
@@ -21,37 +20,35 @@ namespace Epstein_Ross_API
 
         }
 
-        public static void Startup() 
+        public static void Startup()
         {
-            foreach (string film in starWarsFilms) 
+            var filmReturned = _api.GetAllShips();
+            shipList.Add(filmReturned);
+
+            while (!hasQuit)
             {
-                var filmReturned = _api.GetFilm(film);
-                filmList.Add(filmReturned);
-                
-                
-            }
-            while (!hasQuit) 
-            {
-                if (!hasQuit) 
-                { 
+                if (!hasQuit)
+                {
                     MainLoop();
                 }
-            }
+            } 
         }
+        
+        
 
         public static void MainLoop() 
         {
             //_api.Connect("test");
-            DisplayHeader("Star Wars Databse");
+            DisplayHeader("Star Wars ship Databse");
            
 
             //menu functionality
-            int menuLength = filmList.Count - 1;
+            int menuLength = shipList[0].Count - 1;
             int i = 1;
 
-            foreach (var item in filmList)
+            foreach (var item in shipList[0])
             {
-                Console.WriteLine($"[{i}]:  {item.Title}");
+                Console.WriteLine($"[{i}]:  {item.name}");
                 i++;
             }
 
@@ -81,10 +78,11 @@ namespace Epstein_Ross_API
                 }
                 i = 1;
                 DisplayHeader("Star Wars Databse");
-
-                foreach (var item in filmList)
+                
+                
+                foreach (var item in shipList[0])
                 {
-                    Console.WriteLine($"[{i}]:  {item}");
+                    Console.WriteLine($"[{i}]:  {item.name}");
                     i++;
                 }
 
@@ -98,9 +96,8 @@ namespace Epstein_Ross_API
 
             
 
-            dynamic chosenItem = filmList[_userChoiceInt - 1];
-            Console.WriteLine(chosenItem);
-            Console.ReadKey();
+            dynamic chosenItem = shipList[0][_userChoiceInt - 1];
+            DisplayShipInfo(chosenItem);
         }
 
         //header method
@@ -109,6 +106,22 @@ namespace Epstein_Ross_API
             Console.Clear();
             Console.WriteLine(headerName.ToUpper());
             Console.WriteLine("===================================================");
+        }
+
+        public static void DisplayShipInfo(dynamic chosenItem) 
+        {
+            dynamic shipInfo = APIConnect.GetShip(chosenItem);
+            DisplayHeader(shipInfo.model.ToString());
+
+            Console.WriteLine($"Ship Name: {shipInfo.name.ToString()}");
+            Console.WriteLine($"Ship Model: {shipInfo.model.ToString()}");
+            Console.WriteLine($"Ship Class: {shipInfo.starship_class.ToString()}");
+            Console.WriteLine($"Ship Manufacturer: {shipInfo.manufacturer.ToString()}");
+            Console.WriteLine($"Hyperdrive Rating: {shipInfo.hyperdrive_rating.ToString()}");
+            Console.WriteLine($"Crew: {shipInfo.crew.ToString()}");
+            Console.WriteLine($"Passengers: {shipInfo.passengers.ToString()}");
+            
+            Console.ReadKey();
         }
 
     }
