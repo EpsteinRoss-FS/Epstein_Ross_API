@@ -16,33 +16,30 @@ namespace Epstein_Ross_API
         {
             _api = new APIConnect();
             Startup();
-            MainLoop();
-
-
-        }
-
-        public static void Startup()
-        {
-            var filmReturned = _api.GetAllShips();
-            shipList.Add(filmReturned);
-
             while (!hasQuit)
             {
                 if (!hasQuit)
                 {
                     MainLoop();
                 }
-            } 
+            }
+            Console.WriteLine("You have executed Order 66.  Have a great day!");
+
+
+        }
+
+        public static void Startup()
+        {
+            var shipReturned = _api.GetAllShips();
+            shipList.Add(shipReturned);
         }
         
         
 
         public static void MainLoop() 
         {
-            //_api.Connect("test");
             DisplayHeader("Star Wars ship Databse");
            
-
             //menu functionality
             int menuLength = shipList[0].Count - 1;
             int i = 1;
@@ -63,7 +60,7 @@ namespace Epstein_Ross_API
             if(_userChoiceInt == 66) 
             {
                 hasQuit = true;
-                Program.Exit();
+                return;
             }
 
             //validate the choice is in range of the menu
