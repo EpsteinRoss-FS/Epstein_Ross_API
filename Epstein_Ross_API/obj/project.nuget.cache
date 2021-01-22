@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2NZY4b3r6FcDbwMOTVUcGma0ovBl1Iy4a1zNb/szAS8LU0wmLENFOQSMoc0olUjTvlF39236pq24o7u+6JBBkg==",
+  "dgSpecHash": "rfwGO5RlKlDhRvSKldoeG3NDbSf6MGeEGDNdZiSTY9UJV3yJecKVJEHqWcV0cp5BM1qNLrFh9CxTLFxYleJ/Jw==",
   "success": true,
   "projectFilePath": "H:\\FullSailDocs\\Classes\\8 - Application Architecture\\4\\API\\Epstein_Ross_API\\Epstein_Ross_API\\Epstein_Ross_API.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\rosse\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

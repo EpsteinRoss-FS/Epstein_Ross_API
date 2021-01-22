@@ -4,9 +4,18 @@ namespace Epstein_Ross_API
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello World!");
+            Application app = new Application();
+        }
+
+        public static void Exit()
+        {
+            if (Application.hasQuit == true) 
+            {
+                Console.WriteLine("You have executed Order 66.  Have a great day!");
+                return;
+            }
         }
     }
 }
