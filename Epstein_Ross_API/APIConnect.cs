@@ -39,12 +39,22 @@ namespace Epstein_Ross_API
         {
             using (WebClient wc = new WebClient())
             {
-            //https://www.swapi.tech/api/starships
+                //https://www.swapi.tech/api/starships
                 string results = wc.DownloadString(apiUrl + "/" + chosenItem.uid);
                 dynamic ship = JObject.Parse(results);
                 return ship.result.properties;
             }
 
+        }
+
+        public static dynamic GetPilot(string pilot) 
+        {
+            using (WebClient wc = new WebClient())
+            {
+                string results = wc.DownloadString(pilot.ToString());
+                dynamic pilotObj = JObject.Parse(results);
+                return pilotObj.result.properties;
+            }
         }
     }
 }

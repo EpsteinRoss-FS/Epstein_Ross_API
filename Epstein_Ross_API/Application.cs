@@ -10,6 +10,7 @@ namespace Epstein_Ross_API
 
         public static APIConnect _api;
         public static List<dynamic> shipList = new List<dynamic>();
+
         public static bool hasQuit = false;
         public Application()
         {
@@ -120,11 +121,35 @@ namespace Epstein_Ross_API
             Console.WriteLine($"Hyperdrive Rating: {shipInfo.hyperdrive_rating.ToString()}");
             Console.WriteLine($"Crew: {shipInfo.crew.ToString()}");
             Console.WriteLine($"Passengers: {shipInfo.passengers.ToString()}");
-            
-            Console.ReadKey();
-        }
 
+
+            Console.WriteLine("\nKNOWN PILOTS:");
+            if (shipInfo.pilots != null)
+                    {
+                        List<dynamic> pilotsList = new List<dynamic>();
+
+                        foreach (dynamic pilot in shipInfo.pilots)
+                        {
+                            pilotsList.Add(APIConnect.GetPilot(pilot.ToString()));
+                        }
+
+                int pilotListCount = pilotsList.Count - 1;
+                int i = 1;
+                foreach (var item in pilotsList)
+                {
+                    Console.WriteLine($"[{i}]:  {item.name}");
+                    i++;
+                }
+                Console.ReadKey();
+
+
+
+            }
+        }
+                
     }
 
-
 }
+
+
+
