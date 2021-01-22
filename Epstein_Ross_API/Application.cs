@@ -50,11 +50,7 @@ namespace Epstein_Ross_API
             int menuLength = shipList[0].Count - 1;
             int i = 1;
 
-            foreach (var item in shipList[0])
-            {
-                Console.WriteLine($"[{i}]:  {item.name}");
-                i++;
-            }
+            Menu.DisplayMenu(shipList[0]);
 
             Console.Write("Please make a selection, or press 66 to exit! >  ");
             string _userChoice = Console.ReadLine();
@@ -82,13 +78,9 @@ namespace Epstein_Ross_API
                 }
                 i = 1;
                 DisplayHeader("Star Wars Databse");
-                
-                
-                foreach (var item in shipList[0])
-                {
-                    Console.WriteLine($"[{i}]:  {item.name}");
-                    i++;
-                }
+
+
+                Menu.DisplayMenu(shipList[0]);
 
                 //error if menu selection out of range    
                 Console.Write($"Invalid entry!  Please enter a number between 1 and {menuLength} or 66 to exit! > ");
@@ -119,14 +111,13 @@ namespace Epstein_Ross_API
 
             if (shipInfo.pilots.Count > 0)
             {
-                
-
                 foreach (dynamic pilot in shipInfo.pilots)
                 {
                     pilotsList.Add(APIConnect.GetPilot(pilot.ToString()));
                 }
             }
-                DisplayHeader(shipInfo.model.ToString());
+            
+            DisplayHeader(shipInfo.model.ToString());
 
             Console.WriteLine($"Ship Name: {shipInfo.name.ToString()}");
             Console.WriteLine($"Ship Model: {shipInfo.model.ToString()}");
@@ -145,11 +136,9 @@ namespace Epstein_Ross_API
 
                 int pilotListCount = pilotsList.Count - 1;
                 int i = 1;
-                foreach (var item in pilotsList)
-                {
-                    Console.WriteLine($"[{i}]:  {item.name}");
-                    i++;
-                }
+
+                Menu.PilotList(pilotsList);
+
                 Console.Write("Please make a selection, or press 66 to return to the menu. >  ");
                 string _userChoice = Console.ReadLine();
 
@@ -173,11 +162,8 @@ namespace Epstein_Ross_API
 
                     
                     i = 1;
-                    foreach (var item in pilotsList)
-                    {
-                        Console.WriteLine($"[{i}]:  {item.name}");
-                        i++;
-                    }
+                    Menu.PilotList(pilotsList);
+
                     Console.Write("Please make a selection, or press 66 to return to the menu. >  ");
                     _userChoice = Console.ReadLine();
 

@@ -12,7 +12,7 @@ namespace Epstein_Ross_API
 {
     class Menu
     {
-        public static int DisplayMenu(dynamic menuItem) 
+        public static void DisplayMenu(dynamic menuItem) 
         {
             int i = 1;
 
@@ -21,7 +21,18 @@ namespace Epstein_Ross_API
                 Console.WriteLine($"[{i}]:  {item.name}");
                 i++;
             }
-            return i;
+            
+        }
+
+        public static void PilotList(dynamic pilotsList) 
+        {
+            int i = 1;
+            foreach (var item in pilotsList)
+            {
+                
+                Console.WriteLine($"[{i}]:  {item.name}");
+                i++;
+            }
         }
 
     }
