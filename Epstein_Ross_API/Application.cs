@@ -111,8 +111,19 @@ namespace Epstein_Ross_API
 
         public static void DisplayShipInfo(dynamic chosenItem) 
         {
+            List<dynamic> pilotsList = new List<dynamic>();
             dynamic shipInfo = APIConnect.GetShip(chosenItem);
-            DisplayHeader(shipInfo.model.ToString());
+
+            if (shipInfo.pilots.Count > 0)
+            {
+                
+
+                foreach (dynamic pilot in shipInfo.pilots)
+                {
+                    pilotsList.Add(APIConnect.GetPilot(pilot.ToString()));
+                }
+            }
+                DisplayHeader(shipInfo.model.ToString());
 
             Console.WriteLine($"Ship Name: {shipInfo.name.ToString()}");
             Console.WriteLine($"Ship Model: {shipInfo.model.ToString()}");
@@ -123,15 +134,11 @@ namespace Epstein_Ross_API
             Console.WriteLine($"Passengers: {shipInfo.passengers.ToString()}");
 
 
-            Console.WriteLine("\nKNOWN PILOTS:");
-            if (shipInfo.pilots != null)
-                    {
-                        List<dynamic> pilotsList = new List<dynamic>();
-
-                        foreach (dynamic pilot in shipInfo.pilots)
-                        {
-                            pilotsList.Add(APIConnect.GetPilot(pilot.ToString()));
-                        }
+            
+            if (shipInfo.pilots.Count > 0)
+            {
+                Console.WriteLine("\nKNOWN PILOTS:");
+                
 
                 int pilotListCount = pilotsList.Count - 1;
                 int i = 1;
@@ -140,11 +147,113 @@ namespace Epstein_Ross_API
                     Console.WriteLine($"[{i}]:  {item.name}");
                     i++;
                 }
+                Console.Write("Please make a selection, or press 66 to return to the menu. >  ");
+                string _userChoice = Console.ReadLine();
+
+                bool isInt = Validation.CheckInt(_userChoice);
+                int _userChoiceInt = isInt ? Int32.Parse(_userChoice) : 000;
+
+                if (_userChoiceInt == 66)
+                {
+                    MainLoop();
+                }
+
+                //validate the choice is in range of the menu
+                bool isInRange = Validation.CheckRange(_userChoiceInt, pilotListCount + 1);
+
+                while (!isInt || !isInRange)
+                {
+                    if (_userChoiceInt == 66)
+                    {
+                        MainLoop();
+                    }
+
+                    
+                    i = 1;
+                    foreach (var item in pilotsList)
+                    {
+                        Console.WriteLine($"[{i}]:  {item.name}");
+                        i++;
+                    }
+                    Console.Write("Please make a selection, or press 66 to return to the menu. >  ");
+                    _userChoice = Console.ReadLine();
+
+                    isInt = Validation.CheckInt(_userChoice);
+                    _userChoiceInt = isInt ? Int32.Parse(_userChoice) : 000;
+
+                    if (_userChoiceInt == 66)
+                    {
+                        MainLoop();
+                    }
+                }
+                dynamic chosenPilot = pilotsList[_userChoiceInt - 1];
+                DisplayPilot(chosenPilot);
+            }
+            else 
+            {
+                Console.WriteLine("\nPress any key to return to the main menu...");
                 Console.ReadKey();
+            }
+        }
+
+        public static void DisplayPilot(dynamic pilot)
+        {
+            dynamic homeworld = APIConnect.GetHomeworld(pilot.homeworld.ToString());
+            Console.Clear();
+            DisplayHeader($"{pilot.name}");
 
 
+            Console.WriteLine($"Name: {pilot.name}");
+            Console.WriteLine($"Gender: {pilot.gender}");
+            Console.WriteLine($"Birth Year: {pilot.birth_year}");
+            Console.WriteLine($"Hair Color: {pilot.hair_color}");
+            Console.WriteLine($"Skin Color: {pilot.skin_color}");
+            Console.WriteLine($"Eye Color: {pilot.eye_color}");
+            Console.WriteLine($"Height: {pilot.height} Centimeters");
+            Console.WriteLine($"Weight: {pilot.weight} Kilograms");
+            Console.WriteLine($"\nHomeworld: {homeworld.name}");
+
+            Console.Write($"Would you like to know more about {homeworld.name}?  yes/no >  ");
+            string userChoice = Console.ReadLine();
+            bool validEntry = Validation.ValidateString(userChoice);
+            while (!validEntry || (userChoice.ToLower() != "yes" && userChoice.ToLower() != "no")) 
+            {
+                Console.WriteLine("Invalid entry!");
+                Console.Write($"Would you like to know more about {homeworld.name}?  yes/no >  ");
+                userChoice = Console.ReadLine();
+                validEntry = Validation.ValidateString(userChoice);
 
             }
+
+            if (userChoice.ToLower() == "no") 
+            {
+                MainLoop();
+            }
+            if (userChoice.ToLower() == "yes") 
+            {
+                DisplayPlanet(homeworld);
+            }
+
+            
+        }
+
+        public static void DisplayPlanet(dynamic planet) 
+        {
+            Console.Clear();
+            DisplayHeader(planet.name.ToString());
+
+            Console.WriteLine($"Planet Name: {planet.name}");
+            Console.WriteLine($"Population: {planet.population} Sentient Lifeforms");
+            Console.WriteLine($"Climate: {planet.climate}");
+            Console.WriteLine($"Terrain: {planet.terrain}");
+            Console.WriteLine($"Surface Water Coverage: {planet.surface_water}%");
+            Console.WriteLine($"Gravity: {planet.gravity} Standard Unit");
+            Console.WriteLine($"Day Length: {planet.rotation_period} Hours");
+            Console.WriteLine($"Year Length: {planet.orbital_period} Days");
+            Console.WriteLine($"Diameter: {planet.diameter} Kilometers");
+
+            Console.WriteLine("\nPress any key to return to main menu...");
+            Console.ReadKey();
         }
                 
     }

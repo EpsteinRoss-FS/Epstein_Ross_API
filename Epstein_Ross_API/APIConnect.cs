@@ -56,5 +56,15 @@ namespace Epstein_Ross_API
                 return pilotObj.result.properties;
             }
         }
+
+        public static dynamic GetHomeworld(string homeworld)
+        {
+            using (WebClient wc = new WebClient())
+            {
+                string results = wc.DownloadString(homeworld.ToString());
+                dynamic planetObj = JObject.Parse(results);
+                return planetObj.result.properties;
+            }
+        }
     }
 }
