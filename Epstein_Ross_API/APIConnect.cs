@@ -1,4 +1,10 @@
-﻿using System;
+﻿/**
+ * Ross Epstein
+ * January 22nd, 2021
+ * API 
+ * **/
+
+using System;
 using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json.Linq;
@@ -19,9 +25,6 @@ namespace Epstein_Ross_API
         }
 
         
-
-
-
         public dynamic GetAllShips() 
         {
     

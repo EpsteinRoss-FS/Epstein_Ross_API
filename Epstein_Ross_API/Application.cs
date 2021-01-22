@@ -1,4 +1,10 @@
-﻿using System;
+﻿/**
+ * Ross Epstein
+ * January 22nd, 2021
+ * API 
+ * **/
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
