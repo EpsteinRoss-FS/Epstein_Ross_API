@@ -21,7 +21,10 @@ namespace Epstein_Ross_API
         public Application()
         {
             _api = new APIConnect();
+            //call startup
             Startup();
+
+            //run app while has not quit
             while (!hasQuit)
             {
                 if (!hasQuit)
@@ -29,14 +32,17 @@ namespace Epstein_Ross_API
                     MainLoop();
                 }
             }
+
+            //Star Wars reference for the win
             Console.WriteLine("You have executed Order 66.  Have a great day!");
-
-
         }
 
         public static void Startup()
         {
+            //pull all ships from database
             var shipReturned = _api.GetAllShips();
+            
+            //create list of ships
             shipList.Add(shipReturned);
         }
         
@@ -50,6 +56,7 @@ namespace Epstein_Ross_API
             int menuLength = shipList[0].Count - 1;
             int i = 1;
 
+            //call menu display class to display all ships
             Menu.DisplayMenu(shipList[0]);
 
             Console.Write("Please make a selection, or press 66 to exit! >  ");
@@ -91,7 +98,7 @@ namespace Epstein_Ross_API
             }
 
             
-
+            //pass the ships to the display ship method
             dynamic chosenItem = shipList[0][_userChoiceInt - 1];
             DisplayShipInfo(chosenItem);
         }
@@ -106,9 +113,12 @@ namespace Epstein_Ross_API
 
         public static void DisplayShipInfo(dynamic chosenItem) 
         {
+            //create an empty list for notable pilots
             List<dynamic> pilotsList = new List<dynamic>();
             dynamic shipInfo = APIConnect.GetShip(chosenItem);
 
+            //if pilots appear in realtion to ship, fetch them
+            //and add them to the list
             if (shipInfo.pilots.Count > 0)
             {
                 foreach (dynamic pilot in shipInfo.pilots)
@@ -117,6 +127,7 @@ namespace Epstein_Ross_API
                 }
             }
             
+            //display all ship data
             DisplayHeader(shipInfo.model.ToString());
 
             Console.WriteLine($"Ship Name: {shipInfo.name.ToString()}");
@@ -129,22 +140,24 @@ namespace Epstein_Ross_API
 
 
             
+            //if ship pilots exist, display their name
             if (shipInfo.pilots.Count > 0)
             {
                 Console.WriteLine("\nKNOWN PILOTS:");
-                
-
                 int pilotListCount = pilotsList.Count - 1;
                 int i = 1;
 
+                //display all pilots who flew ship in records
                 Menu.PilotList(pilotsList);
 
+                //allow user to select a pilot to learn more about
                 Console.Write("Please make a selection, or press 66 to return to the menu. >  ");
                 string _userChoice = Console.ReadLine();
 
                 bool isInt = Validation.CheckInt(_userChoice);
                 int _userChoiceInt = isInt ? Int32.Parse(_userChoice) : 000;
 
+                //exit to main menu
                 if (_userChoiceInt == 66)
                 {
                     MainLoop();
@@ -160,8 +173,8 @@ namespace Epstein_Ross_API
                         MainLoop();
                     }
 
-                    
                     i = 1;
+
                     Menu.PilotList(pilotsList);
 
                     Console.Write("Please make a selection, or press 66 to return to the menu. >  ");
@@ -175,7 +188,11 @@ namespace Epstein_Ross_API
                         MainLoop();
                     }
                 }
+
+                //get pilot data
                 dynamic chosenPilot = pilotsList[_userChoiceInt - 1];
+                
+                //display selected pilot
                 DisplayPilot(chosenPilot);
             }
             else 
@@ -187,11 +204,12 @@ namespace Epstein_Ross_API
 
         public static void DisplayPilot(dynamic pilot)
         {
+            //fetch the person's homeworld
             dynamic homeworld = APIConnect.GetHomeworld(pilot.homeworld.ToString());
             Console.Clear();
+            
+            //display all pilot data
             DisplayHeader($"{pilot.name}");
-
-
             Console.WriteLine($"Name: {pilot.name}");
             Console.WriteLine($"Gender: {pilot.gender}");
             Console.WriteLine($"Birth Year: {pilot.birth_year}");
@@ -202,13 +220,16 @@ namespace Epstein_Ross_API
             Console.WriteLine($"Weight: {pilot.weight} Kilograms");
             Console.WriteLine($"\nHomeworld: {homeworld.name}");
 
-            Console.Write($"Would you like to know more about {homeworld.name}?  yes/no >  ");
+            Console.Write($"\nWould you like to know more about {homeworld.name}?  yes/no >  ");
+            
             string userChoice = Console.ReadLine();
             bool validEntry = Validation.ValidateString(userChoice);
+            
+            //check if user wants to see homeworld info
             while (!validEntry || (userChoice.ToLower() != "yes" && userChoice.ToLower() != "no")) 
             {
                 Console.WriteLine("Invalid entry!");
-                Console.Write($"Would you like to know more about {homeworld.name}?  yes/no >  ");
+                Console.Write($"\nWould you like to know more about {homeworld.name}?  yes/no >  ");
                 userChoice = Console.ReadLine();
                 validEntry = Validation.ValidateString(userChoice);
 
@@ -218,6 +239,7 @@ namespace Epstein_Ross_API
             {
                 MainLoop();
             }
+
             if (userChoice.ToLower() == "yes") 
             {
                 DisplayPlanet(homeworld);
@@ -228,6 +250,8 @@ namespace Epstein_Ross_API
 
         public static void DisplayPlanet(dynamic planet) 
         {
+
+            //display all homeworld information
             Console.Clear();
             DisplayHeader(planet.name.ToString());
 

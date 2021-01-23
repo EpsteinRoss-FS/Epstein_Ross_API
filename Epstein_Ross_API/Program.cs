@@ -12,6 +12,7 @@ namespace Epstein_Ross_API
     {
         static void Main()
         {
+            //create application instance
             Application app = new Application();
         }
 

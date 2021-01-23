@@ -12,6 +12,7 @@ namespace Epstein_Ross_API
 {
     class Menu
     {
+        //display menu items
         public static void DisplayMenu(dynamic menuItem) 
         {
             int i = 1;
@@ -24,6 +25,7 @@ namespace Epstein_Ross_API
             
         }
 
+        //display pilots
         public static void PilotList(dynamic pilotsList) 
         {
             int i = 1;
