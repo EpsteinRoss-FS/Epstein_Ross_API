@@ -1,7 +1,6 @@
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.csprojAssemblyReference.cache
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.AssemblyInfoInputs.cache
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.AssemblyInfo.cs
-H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.csproj.CoreCompileInputs.cache
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\bin\Debug\netcoreapp3.1\Epstein_Ross_API.exe
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\bin\Debug\netcoreapp3.1\Epstein_Ross_API.deps.json
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\bin\Debug\netcoreapp3.1\Epstein_Ross_API.runtimeconfig.json
@@ -13,3 +12,7 @@ H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epst
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.dll
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.pdb
 H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.genruntimeconfig.cache
+H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\obj\Debug\netcoreapp3.1\Epstein_Ross_API.csproj.CoreCompileInputs.cache
+H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+H:\FullSailDocs\Classes\8 - Application Architecture\4\API\Epstein_Ross_API\Epstein_Ross_API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

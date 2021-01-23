@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Web.Http;
 
 namespace Epstein_Ross_API
 {
@@ -32,7 +33,7 @@ namespace Epstein_Ross_API
             {
                 //get all ships
                 string results = wc.DownloadString(apiUrl);
-                
+            
                 //parse to json object
                 dynamic allShips = JObject.Parse(results);
                 
@@ -48,7 +49,7 @@ namespace Epstein_Ross_API
             {
                 //get starship based on UID of selected starship
                 string results = wc.DownloadString(apiUrl + "/" + chosenItem.uid);
-                
+           
                 //parse to JSON object
                 dynamic ship = JObject.Parse(results);
                 
@@ -64,7 +65,7 @@ namespace Epstein_Ross_API
             {
                 //get pilot info
                 string results = wc.DownloadString(pilot.ToString());
-                
+          
                 //parse pilot JSON object
                 dynamic pilotObj = JObject.Parse(results);
                 

@@ -14,8 +14,8 @@ namespace Epstein_Ross_API
     {
 
 
-        public static APIConnect _api;
-        public static List<dynamic> shipList = new List<dynamic>();
+        protected static APIConnect _api;
+        protected static List<dynamic> shipList = new List<dynamic>();
 
         public static bool hasQuit = false;
         public Application()
@@ -25,13 +25,7 @@ namespace Epstein_Ross_API
             Startup();
 
             //run app while has not quit
-            while (!hasQuit)
-            {
-                if (!hasQuit)
-                {
-                    MainLoop();
-                }
-            }
+        
 
             //Star Wars reference for the win
             Console.WriteLine("You have executed Order 66.  Have a great day!");
@@ -42,11 +36,23 @@ namespace Epstein_Ross_API
             //pull all ships from database
             var shipReturned = _api.GetAllShips();
             
+    
             //create list of ships
             shipList.Add(shipReturned);
+            PrimaryCall();
         }
-        
-        
+
+
+        public static void PrimaryCall() 
+        {
+            while (!hasQuit)
+            {
+                if (!hasQuit)
+                {
+                    MainLoop();
+                }
+            }
+        }
 
         public static void MainLoop() 
         {
